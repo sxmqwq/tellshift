@@ -1,12 +1,13 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0c1118">
-  <meta name="description" content="Tellshift：识破 bot 的秘密策略，同时隐藏自己的身份。一个关于试探、伪装和判断时机的猜拳博弈。">
-  <title>Tellshift — 看穿对手，藏住自己</title>
+  <meta name="theme-color" content="#f1f3ed">
+  <meta name="description" content="tellshift：识破 bot 的秘密策略，同时隐藏自己的身份。一个关于试探、伪装和判断时机的猜拳博弈。">
+  <title>tellshift — 看穿对手，藏住自己</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <script src="./src/theme.js"></script>
   <link rel="stylesheet" href="./src/style.css">
   <script type="module" src="./src/app.js"></script>
 </head>
@@ -14,12 +15,13 @@
   <a class="skip-link" href="#arena">跳转到对局</a>
   <div class="shell">
     <header class="site-header">
-      <a class="brand" href="./" aria-label="Tellshift 首页">
+      <a class="brand" href="./" aria-label="tellshift 首页">
         <svg viewBox="0 0 36 36" aria-hidden="true"><path d="M5 10 18 3l13 7v16l-13 7-13-7Z"/><path d="m11 14 7 4 7-4M18 18v9M11 22l7-4 7 4"/></svg>
-        <span>TELLSHIFT<span class="brand-sub">READ THEM. STAY UNREAD.</span></span>
+        <span>tellshift<span class="brand-sub">READ THEM. STAY UNREAD.</span></span>
       </a>
       <div class="header-actions">
         <span class="system-status"><i></i> 推理系统就绪</span>
+        <label class="theme-picker" for="theme-mode"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><select id="theme-mode" aria-label="界面主题"><option value="light">浅色</option><option value="dark">深色</option><option value="system">跟随系统</option></select></label>
         <button class="quiet-button" id="rules-open">玩法档案 <span>↗</span></button>
         <a class="source-link" href="https://github.com/sxmqwq/tellshift" target="_blank" rel="noopener noreferrer" aria-label="在 GitHub 查看源码"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1-4-2-6-2m12 5v-4c0-1 .1-2-1-2 4 0 7-2 7-6a5 5 0 0 0-1-4 5 5 0 0 0 0-4s-1-1-4 1a13 13 0 0 0-8 0C5 1 4 2 4 2a5 5 0 0 0 0 4 5 5 0 0 0-1 4c0 4 3 6 7 6-1 0-1 1-1 2v4"/></svg></a>
       </div>
@@ -100,7 +102,7 @@
       </section>
       <section class="personal-record" aria-label="本机战绩"><span>LOCAL DOSSIER</span><p id="local-stats">你的第一份行动档案，即将建立。</p><span>识别，比取胜更难。</span></section>
     </main>
-    <footer><span>TELLSHIFT <b>v1.0</b></span><p>Read them. Stay unread.</p><span>DESIGNED FOR THE DOUBLE GAME</span></footer>
+    <footer><span>tellshift <b>v1.1</b></span><p>Read them. Stay unread.</p><span>DESIGNED FOR THE DOUBLE GAME</span></footer>
   </div>
 
   <dialog id="rules-dialog" class="modal rules-modal" aria-labelledby="rules-title"><div class="modal-heading"><span class="eyebrow">THE PROTOCOL</span><button class="icon-button close-dialog" aria-label="关闭玩法档案">×</button></div><h2 id="rules-title">潜伏行动手册</h2><p class="modal-lead">你和 bot 都有秘密策略。认出它，别被认出。</p><ol class="rule-steps"><li><b>领取身份</b><span>五种身份随机分配，可以相同。第一手自由选择；以后根据真实历史计算正常招式。</span></li><li><b>出招或伪装</b><span>正常出招免费，偏离消耗 1 点。初始 3 点，每累计赢两手恢复 1 点，上限 3 点。双方余额各自保密。</span></li><li><b>收集证据</b><span>bot 会在你选择前锁定出招。双方公开出招后，你可以在嫌疑档案中标记、排除候选身份。</span></li><li><b>秘密指认</b><span>第 4 回合起可指认，也可继续观察。bot 先锁定判断，双方同时结算。第 12 回合必须指认。</span></li></ol><div class="rules-result"><h3>胜负如何判定？</h3><p>只有一方正确指认，正确者胜；只有一方指认且猜错，指认者负。双方同时猜中，比猜拳胜场；双方同时猜错则平局。胜场相同也平局。</p></div><div id="rules-role-list" class="rules-role-list"></div><p class="rules-fair">bot 只能根据公开出招推理。你的身份、余额和嫌疑笔记不会传给它的推理模块。</p><button class="primary-button close-dialog">已了解，保持隐蔽 <span>→</span></button></dialog>

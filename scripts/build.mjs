@@ -6,4 +6,4 @@ await mkdir(`${root}/dist`, { recursive: true });
 for (const path of ['index.html', 'src', 'favicon.svg', '.nojekyll']) {
   await cp(`${root}/${path}`, `${root}/dist/${path}`, { recursive: true });
 }
-console.log('Tellshift built → dist/ (no runtime dependencies)');
+console.log('tellshift built → dist/ (no runtime dependencies)');

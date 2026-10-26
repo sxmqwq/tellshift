@@ -1,4 +1,4 @@
-name: Test and deploy Tellshift
+name: Test and deploy tellshift
 
 on:
   push:
