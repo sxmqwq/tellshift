@@ -1,0 +1,12 @@
+{
+  "name": "tellshift",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Read them. Stay unread. A two-way strategy deduction game.",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "build": "node scripts/build.mjs"
+  },
+  "engines": { "node": ">=22" }
+}

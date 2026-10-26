@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c1118">
+  <meta name="description" content="Tellshift：识破 bot 的秘密策略，同时隐藏自己的身份。一个关于试探、伪装和判断时机的猜拳博弈。">
+  <title>Tellshift — 看穿对手，藏住自己</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./src/style.css">
+  <script type="module" src="./src/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#arena">跳转到对局</a>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Tellshift 首页">
+        <svg viewBox="0 0 36 36" aria-hidden="true"><path d="M5 10 18 3l13 7v16l-13 7-13-7Z"/><path d="m11 14 7 4 7-4M18 18v9M11 22l7-4 7 4"/></svg>
+        <span>TELLSHIFT<span class="brand-sub">READ THEM. STAY UNREAD.</span></span>
+      </a>
+      <div class="header-actions">
+        <span class="system-status"><i></i> 推理系统就绪</span>
+        <button class="quiet-button" id="rules-open">玩法档案 <span>↗</span></button>
+        <a class="source-link" href="https://github.com/sxmqwq/tellshift" target="_blank" rel="noopener noreferrer" aria-label="在 GitHub 查看源码"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1-4-2-6-2m12 5v-4c0-1 .1-2-1-2 4 0 7-2 7-6a5 5 0 0 0-1-4 5 5 0 0 0 0-4s-1-1-4 1a13 13 0 0 0-8 0C5 1 4 2 4 2a5 5 0 0 0 0 4 5 5 0 0 0-1 4c0 4 3 6 7 6-1 0-1 1-1 2v4"/></svg></a>
+      </div>
+    </header>
+
+    <section class="briefing">
+      <div><div class="eyebrow"><span class="tiny-cross">+</span> OPERATION / HIDDEN IN PLAIN SIGHT</div><h1>看穿对手<span class="accent">，</span>藏住自己<span class="accent">。</span></h1><p>每一手都是证据。你能在暴露之前，认出对面的策略吗？</p></div>
+      <div class="mission-stamp"><span>双向策略识别</span><strong>05<span>种身份</span><b>/</b>12<span>回合</span></strong><div><i></i> ONE READ CAN CHANGE EVERYTHING</div></div>
+    </section>
+
+    <main>
+      <section class="match-strip" aria-label="对局状态">
+        <div class="match-id"><span class="eyebrow">MISSION</span><strong id="mission-id">等待接入</strong></div>
+        <div class="round-track"><span id="round-label">准备开始</span><div class="round-dots" id="round-dots" aria-hidden="true"></div></div>
+        <div class="score"><span>猜拳战绩</span><strong><b id="player-score">0</b><em>:</em><b id="bot-score">0</b></strong><small>YOU <span>/</span> BOT</small></div>
+      </section>
+
+      <div class="game-grid">
+        <aside class="panel notebook" aria-labelledby="notebook-title">
+          <div class="panel-heading"><div><span class="eyebrow">INTELLIGENCE</span><h2 id="notebook-title">嫌疑档案</h2></div><span class="number-chip">05</span></div>
+          <p class="panel-intro">点击标记嫌疑，再次点击取消。<br>右侧划除按钮只记录你的判断。</p>
+          <div id="suspects" class="suspect-list"></div>
+          <div class="notebook-foot"><span class="tiny-cross">+</span><p>伪装会制造反例。<br>一手不符，未必就能排除。</p></div>
+        </aside>
+
+        <section class="panel arena" id="arena" aria-labelledby="arena-title">
+          <div class="arena-top"><span id="phase-label" class="eyebrow">FIELD / 等待行动</span><span id="bot-lock" class="lock-status">● 信道待接入</span></div>
+          <div class="opponents">
+            <div class="opponent"><div class="avatar bot-avatar"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M15 23 40 10l25 13v29L40 68 15 52Z"/><path d="m25 32 15 8 15-8M25 46l15-6 15 6M40 40v17"/><path class="eye-line" d="m24 29 9 4m14 0 9-4"/></svg></div><div class="identity-label">UNKNOWN AGENT</div><h3 id="bot-name">身份未知</h3><span class="agent-badge" id="bot-badge">5 个可能 · 1 个真相</span></div>
+            <div class="versus"><span></span><b>×</b><span></span></div>
+            <div class="opponent"><div class="avatar player-avatar"><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="30" r="12"/><path d="M17 65v-7c0-10 10-17 23-17s23 7 23 17v7M31 46l9 10 9-10M40 56v10"/><path d="M20 14h-7v9m47-9h7v9M13 57v10h9m45-10v10h-9"/></svg></div><div class="identity-label">YOUR COVER</div><h3 id="player-name">等待身份</h3><span class="agent-badge player-badge" id="player-badge">仅你可见</span></div>
+          </div>
+
+          <div class="welcome" id="welcome">
+            <div class="section-divider"><span>潜伏任务</span></div>
+            <h2>你的身份，是最需要藏住的线索。</h2>
+            <p>按秘密策略出招，或花费伪装点制造假象。<br>第 4 回合起，抢在 bot 之前做出正确指认。</p>
+            <div class="difficulty-control"><label for="difficulty">对手级别</label><select id="difficulty"><option value="rookie">见习 · 谨慎判断</option><option value="standard" selected>特工 · 标准挑战</option><option value="expert">幽灵 · 主动伪装</option></select></div>
+            <button id="start-game" class="primary-button start-button">开始潜伏 <span>↗</span></button>
+            <div class="welcome-meta"><span>无需登录</span><i></i><span>约 3–5 分钟</span><i></i><span>进度自动保留</span></div>
+          </div>
+
+          <div id="active-game" hidden>
+            <div id="round-message" class="round-message" aria-live="polite"></div>
+            <div id="move-area">
+              <div class="move-heading"><span>选择本轮出招</span><small>1 / 2 / 3 选择 · Enter 锁定</small></div>
+              <div id="moves" class="move-list"></div>
+              <p id="move-hint" class="move-hint">第一回合自由出招，不消耗伪装点。</p>
+              <button class="primary-button" id="lock-move" disabled>选择一手后锁定 <span>→</span></button>
+            </div>
+            <div id="decision-area" hidden>
+              <div class="round-reveal" id="round-reveal"></div>
+              <div class="decision-copy" id="decision-copy"></div>
+              <div class="difficulty-control accusation-picker" id="accusation-picker" hidden><label for="accusation-target">指认目标</label><select id="accusation-target"><option value="">选择嫌疑身份</option></select></div>
+              <div class="decision-actions"><button id="continue-game" class="secondary-button">继续观察 <span>→</span></button><button id="accuse-button" class="primary-button" disabled>选择嫌疑后指认 <span>↗</span></button></div>
+              <p class="decision-warning" id="decision-warning">双方秘密提交，同时结算。错误指认会让你输掉本局。</p>
+            </div>
+            <div id="ended-area" hidden></div>
+          </div>
+          <div class="arena-bottom"><span><i></i> 同时出招 · 秘密指认</span><span id="mode-label">STANDARD PROTOCOL</span></div>
+        </section>
+
+        <aside class="right-column">
+          <section class="panel identity-panel" aria-labelledby="identity-title">
+            <div class="panel-heading"><div><span class="eyebrow">CLASSIFIED / 仅你可见</span><h2 id="identity-title">你的秘密身份</h2></div><button id="hide-identity" class="icon-button" aria-label="隐藏身份" title="隐藏身份" disabled>◉</button></div>
+            <div id="identity-details" class="identity-details"><div class="role-watermark">?</div><span class="role-code">身份尚未分配</span><h3>先接入任务</h3><p>你和 bot 各有一个秘密身份。<br>双方都要识别对方，也要隐藏自己。</p></div>
+            <div class="normal-move" id="normal-move"><span>本轮正常招式</span><strong>—</strong></div>
+          </section>
+          <section class="panel resource-panel" aria-labelledby="resource-title"><div class="resource-title"><h2 id="resource-title">伪装额度</h2><span id="token-count">— / 3</span></div><div class="token-slots" id="token-slots" aria-label="伪装额度未分配"><span></span><span></span><span></span></div><p>偏离身份消耗 1 点。<br>每累计赢两手恢复 1 点，最多 3 点。</p><div class="recharge-track" id="recharge-track"><span>补充进度</span><i></i><i></i><small>0 / 2</small></div></section>
+          <section class="field-note"><span class="eyebrow">FIELD NOTE / 01</span><p>试探能照亮对手，<br>也会照亮你自己。</p><svg viewBox="0 0 72 40" aria-hidden="true"><path d="M2 20s12-17 34-17 34 17 34 17-12 17-34 17S2 20 2 20Z"/><circle cx="36" cy="20" r="9"/><path d="m8 35 56-30"/></svg></section>
+        </aside>
+      </div>
+
+      <section class="panel history-panel" aria-labelledby="history-title">
+        <div class="history-header"><div class="panel-heading"><div><span class="eyebrow">PUBLIC RECORD</span><h2 id="history-title">行动记录</h2></div><span id="history-count" class="number-chip">00</span></div><div class="history-actions"><span id="history-hint">公开出招是你唯一的证据</span><button class="quiet-button" id="restart-game" disabled>重新开始 ↗</button></div></div>
+        <div id="history-empty" class="history-empty"><span>⌁</span><p>还没有留下任何痕迹。<small>开始对局后，每一轮出招都会记录在这里。</small></p></div>
+        <div class="table-scroll" id="history-table-wrap" hidden><table><thead><tr><th>回合</th><th>你的出招</th><th>BOT 出招</th><th>本轮结果</th><th id="history-detail-head">你的伪装</th><th>行动备注</th></tr></thead><tbody id="history-body"></tbody></table></div>
+      </section>
+      <section class="personal-record" aria-label="本机战绩"><span>LOCAL DOSSIER</span><p id="local-stats">你的第一份行动档案，即将建立。</p><span>识别，比取胜更难。</span></section>
+    </main>
+    <footer><span>TELLSHIFT <b>v1.0</b></span><p>Read them. Stay unread.</p><span>DESIGNED FOR THE DOUBLE GAME</span></footer>
+  </div>
+
+  <dialog id="rules-dialog" class="modal rules-modal" aria-labelledby="rules-title"><div class="modal-heading"><span class="eyebrow">THE PROTOCOL</span><button class="icon-button close-dialog" aria-label="关闭玩法档案">×</button></div><h2 id="rules-title">潜伏行动手册</h2><p class="modal-lead">你和 bot 都有秘密策略。认出它，别被认出。</p><ol class="rule-steps"><li><b>领取身份</b><span>五种身份随机分配，可以相同。第一手自由选择；以后根据真实历史计算正常招式。</span></li><li><b>出招或伪装</b><span>正常出招免费，偏离消耗 1 点。初始 3 点，每累计赢两手恢复 1 点，上限 3 点。双方余额各自保密。</span></li><li><b>收集证据</b><span>bot 会在你选择前锁定出招。双方公开出招后，你可以在嫌疑档案中标记、排除候选身份。</span></li><li><b>秘密指认</b><span>第 4 回合起可指认，也可继续观察。bot 先锁定判断，双方同时结算。第 12 回合必须指认。</span></li></ol><div class="rules-result"><h3>胜负如何判定？</h3><p>只有一方正确指认，正确者胜；只有一方指认且猜错，指认者负。双方同时猜中，比猜拳胜场；双方同时猜错则平局。胜场相同也平局。</p></div><div id="rules-role-list" class="rules-role-list"></div><p class="rules-fair">bot 只能根据公开出招推理。你的身份、余额和嫌疑笔记不会传给它的推理模块。</p><button class="primary-button close-dialog">已了解，保持隐蔽 <span>→</span></button></dialog>
+
+  <dialog id="confirm-dialog" class="modal confirm-modal" aria-labelledby="confirm-title"><div class="modal-heading"><span class="eyebrow" id="confirm-eyebrow">MAKE YOUR CALL</span><button class="icon-button close-dialog" aria-label="返回对局">×</button></div><h2 id="confirm-title">确认指认？</h2><p id="confirm-description"></p><div class="confirm-actions"><button class="secondary-button close-dialog">返回对局</button><button class="primary-button" id="confirm-action">确认指认 →</button></div></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>
